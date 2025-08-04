@@ -14,6 +14,7 @@ def check_stock(url):
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
 
+    # No need to specify executable_path if chromedriver is in /usr/local/bin or /usr/bin
     driver = webdriver.Chrome(options=options)
     driver.get(url)
 
