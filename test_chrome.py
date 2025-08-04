@@ -8,8 +8,9 @@ options.add_argument("--headless")
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
 
-with tempfile.TemporaryDirectory() as tmpdirname:
-    options.add_argument(f'--user-data-dir={tmpdirname}')
+# Create a unique temp directory for user data
+with tempfile.TemporaryDirectory() as user_data_dir:
+    options.add_argument(f"--user-data-dir={user_data_dir}")
     driver = webdriver.Chrome(options=options)
     driver.get("https://www.google.com")
     print(driver.title)
