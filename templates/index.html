@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Croma Stock Alert</title>
+    <title>Croma Stock Checker</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 3em; }
+        input[type=text] { width: 400px; padding: 0.4em; }
+        button { padding: 0.4em 1em; }
+    </style>
 </head>
 <body>
-    <h1>Croma Stock Alert</h1>
+    <h1>Croma Stock Checker</h1>
     <form method="post">
         <input type="text" name="product_url" placeholder="Paste Croma product URL" required>
-        <button type="submit">Watch Product</button>
+        <button type="submit">Check Stock</button>
     </form>
     {% if status %}
-        <p>Status: {{ status }}</p>
+        <p><strong>Status:</strong> <span style="color:{{ 'green' if status=='In Stock' else 'red' }}">{{ status }}</span></p>
     {% endif %}
     {% if product_url %}
-        <p>Product URL: <a href="{{ product_url }}" target="_blank">{{ product_url }}</a></p>
+        <p><a href="{{ product_url }}" target="_blank">View Product Page</a></p>
     {% endif %}
 </body>
 </html>
