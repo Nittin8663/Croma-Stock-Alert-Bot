@@ -2,31 +2,18 @@
 <html>
 <head>
     <title>Croma Stock Alert</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 30px; max-width: 600px; }
-        input[type=text] { width: 70%; padding: 7px; }
-        button { padding: 7px 16px; }
-        ul { padding-left: 16px; }
-        .instock { color: green; font-weight: bold;}
-        .oos { color: #b00; }
-    </style>
 </head>
 <body>
     <h1>Croma Stock Alert</h1>
     <form method="post">
-        <input type="text" name="url" placeholder="Paste Croma product URL" required>
+        <input type="text" name="product_url" placeholder="Paste Croma product URL" required>
         <button type="submit">Watch Product</button>
     </form>
-    <h2>Watched Products</h2>
-    <ul>
-    {% for p in products %}
-        <li>
-            <a href="{{ p.url }}" target="_blank">{{ p.url }}</a> -
-            {% if p.in_stock %}<span class="instock">In Stock</span>{% else %}<span class="oos">Out of Stock</span>{% endif %}
-        </li>
-    {% else %}
-        <li>No products being watched yet.</li>
-    {% endfor %}
-    </ul>
+    {% if status %}
+        <p>Status: {{ status }}</p>
+    {% endif %}
+    {% if product_url %}
+        <p>Product URL: <a href="{{ product_url }}" target="_blank">{{ product_url }}</a></p>
+    {% endif %}
 </body>
 </html>
