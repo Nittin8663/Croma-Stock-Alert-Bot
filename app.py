@@ -5,16 +5,19 @@ import requests
 app = Flask(__name__)
 
 def check_stock(url):
-    try:
-        response = requests.get(url, timeout=10)
-        soup = BeautifulSoup(response.text, "html.parser")
-        buy_now_btn = soup.find("button", class_="buyNowBtn")
-        if buy_now_btn:
-            return "In Stock"
-        else:
-            return "Out of Stock"
-    except Exception as e:
-        return f"Error: {str(e)}"
+    import requests
+    from bs4 import BeautifulSoup
+
+    headers = {'User-Agent': 'Mozilla/5.0'}
+    response = requests.get(url, headers=headers, timeout=10)
+    soup = BeautifulSoup(response.text, "html.parser")
+    
+    # Find the Buy Now button by its class
+    buy_now_btn = soup.find("button", class_="buyNowBtn")
+    if buy_now_btn and "Buy Now" in buy_now_btn.text:
+        return "In Stock"
+    else:
+        return "Out of Stock"
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
